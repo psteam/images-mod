@@ -1,21 +1,13 @@
-<h1>Listing images</h1>
+<h1>Images</h1>
 
-<table>
-  <tr>
-    <th>Image</th>
-    <th>Action</th>
-  </tr>
-
-<% @images.each do |image| %>
-  <tr>
-    <td><img src="<%= image.imgurl %>"/></td>
-    <!--<td><%= link_to 'Show', image %></td>-->
-    <!--<td><%= link_to 'Edit', edit_image_path(image) %></td>-->
-    <td><%= link_to 'Delete', image, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<%= form_for :image do |f| %>
+  <% @images.each do |image| %>
+  <p>
+    <img src="<%= image.imgurl %>" /><%= f.radio_button :suitable, 'keep' %>
+      <%= label :suitable, 'Keep', :value => 'keep' %>
+    <%= f.radio_button :suitable, 'remove', :checked => true %>
+      <%= label :suitable, 'Remove', :value => 'remove' %>
+  </p>
+  <% end %>
+  <p><%= submit_tag "Save" %></p>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'Save', save_image_path(:param1 => @images) %>

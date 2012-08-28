@@ -40,6 +40,7 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
+    puts params
     @image = Image.new(params[:image])
 
     respond_to do |format|
@@ -79,5 +80,10 @@ class ImagesController < ApplicationController
       format.html { redirect_to images_url }
       format.json { head :no_content }
     end
+  end
+
+  def save
+    images = params[:images]
+    redirect_to :controller=>'images',:action=>'invite'
   end
 end
